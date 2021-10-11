@@ -7,10 +7,10 @@ const Form = () => {
     let passwordValue = ''
 
     const onChangeInput = (event) => {
-        if (event.type == 'email') {
-            emailValue = event.value
-        } else if (event.type == 'password') {
-            passwordValue = event.value
+        if (event.target.type == 'email') {
+            emailValue = event.target.value
+        } else if (event.target.type == 'password') {
+            passwordValue = event.target.value
         }
     }
 
@@ -30,12 +30,8 @@ const Form = () => {
         <div className={style.container}>
             <div className={style.inner}>
                 <form onSubmit={handleSubmit} className={style.form}>
-                    <input onChange={(event) => {
-                        onChangeInput(event.target)
-                    }} className={style.email} type="email" placeholder='email'/>
-                    <input onChange={(event) => {
-                        onChangeInput(event.target)
-                    }} className={style.password} type="password" placeholder='password'/>
+                    <input onChange={onChangeInput} className={style.email} type="email" placeholder='email'/>
+                    <input onChange={onChangeInput} className={style.password} type="password" placeholder='password'/>
                     <button className={style.button} type="submit">Отправить</button>
                 </form>
             </div>
