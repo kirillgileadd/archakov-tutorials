@@ -6,12 +6,10 @@ import {nounsArr, adjectivesArr} from "./data";
 
 const App = () => {
     const [items, setItems] = useState([])
-    let phrase = ''
 
     const addPhrase = () => {
-        phrase = `${adjectivesArr[Math.floor(Math.random() * adjectivesArr.length)]} ${adjectivesArr[Math.floor(Math.random() * adjectivesArr.length)]} ${nounsArr[Math.floor(Math.random() * nounsArr.length)]}`
+        let phrase  = `${adjectivesArr[Math.floor(Math.random() * adjectivesArr.length)]} ${adjectivesArr[Math.floor(Math.random() * adjectivesArr.length)]} ${nounsArr[Math.floor(Math.random() * nounsArr.length)]}`
         setItems([phrase, ...items])
-        phrase = ''
     }
 
     const clearItems = () => {
