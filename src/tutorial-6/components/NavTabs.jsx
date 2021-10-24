@@ -15,22 +15,16 @@ export default function NavTabs() {
     return (
         <Box>
             <Tabs
-                value={value}
                 onChange={handleChange}
                 aria-label="wrapped label tabs example"
-                indicatorColor="palette.warning.dark"
-                textColor="white"
-
             >
                 <LinkTab
                     sx={{ml: 2, backgroundColor: "white", color: "blue", borderRadius: 1}}
                     href="main"
-                    value="main"
                     label="MAIN"
                 />
                 <LinkTab
                     sx={{ml: 2, backgroundColor: "white", color: "blue", borderRadius: 1}}
-                    value="about"
                     href="about"
                     label="ABOUT"/>
             </Tabs>

@@ -9,7 +9,7 @@ const CardsList = ({cards}) => {
         <Grid container spacing={2} sx={{padding: 3, justifyContent: "center"}}>
             {
                 cards.map((item) => (
-                    <Grid item md={4}>
+                    <Grid key={item.id} item md={4}>
                         <CardItem key={item.id} {...item} />
                     </Grid>))
             }
