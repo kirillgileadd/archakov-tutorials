@@ -1,33 +1,30 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Tabs from '@mui/material/Tabs';
-import LinkTab from "./LinkTab";
-import {blue} from "@mui/material/colors";
+import {Button, ButtonGroup} from "@mui/material";
+import {Link} from "react-router-dom";
 
 
 export default function NavTabs() {
-    const [value, setValue] = React.useState('one');
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
+    const buttons = [
+        <Button key="one" component={Link} to={'/'}>Main</Button>,
+        <Button key="two" component={Link} to={'/about'}>About</Button>,
+        <Button key="three" component={Link} to={'/shop'}>Shop</Button>,
+    ];
 
     return (
-        <Box>
-            <Tabs
-                onChange={handleChange}
-                aria-label="wrapped label tabs example"
-            >
-                <LinkTab
-                    sx={{ml: 2, backgroundColor: "white", color: "blue", borderRadius: 1}}
-                    href="main"
-                    label="MAIN"
-                />
-                <LinkTab
-                    sx={{ml: 2, backgroundColor: "white", color: "blue", borderRadius: 1}}
-                    href="about"
-                    label="ABOUT"/>
-            </Tabs>
+        <Box
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                '& > *': {
+                    m: 1,
+                },
+            }}
+        >
+            <ButtonGroup variant="contained" color="secondary" aria-label="medium secondary button group">
+                {buttons}
+            </ButtonGroup>
         </Box>
     );
 }

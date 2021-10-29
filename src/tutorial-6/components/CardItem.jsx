@@ -1,7 +1,8 @@
 import React from 'react';
 import {Box, Button, Card, CardActions, CardContent, CardMedia, Grid, Typography} from "@mui/material";
+import {Link, useParams} from "react-router-dom";
 
-const CardItem = ({poster, name}) => {
+const CardItem = ({id, poster, name}) => {
     return (
         <Card sx={{
             maxWidth: 345,
@@ -15,8 +16,8 @@ const CardItem = ({poster, name}) => {
                 <CardMedia
                     component="img"
                     height="140"
-                    image={poster}
                     alt="green iguana"
+                    image={poster}
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h6" component="div">
@@ -25,7 +26,7 @@ const CardItem = ({poster, name}) => {
                 </CardContent>
             </Box>
             <CardActions>
-                <Button size="small">Learn More</Button>
+                <Button component={Link} to={`/post/${id}`} size="small">Learn More</Button>
             </CardActions>
         </Card>
     );
