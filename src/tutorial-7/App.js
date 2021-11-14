@@ -3,9 +3,24 @@ import {useForm} from "react-hook-form";
 
 import "./App.css";
 import {Box, Button, TextField} from "@mui/material";
+import * as yup from "yup";
+import {yupResolver} from "@hookform/resolvers/yup";
 
 function App() {
-    const {handleSubmit, register, formState, reset} = useForm();
+    const schema = yup.object({
+        firstName: yup.string().required(''),
+        lastName: yup.string().required(''),
+        email: yup.string().email(' ').required(''),
+        password: yup.string()
+        .when('email', {
+            is: value => value.includes('@'),
+            then: yup.string().min(5),
+        })
+    }).required();
+
+    const {handleSubmit, register, formState, formState: {errors}, reset} = useForm({
+        resolver: yupResolver(schema)
+    });
 
     const onSubmit = (values) => console.log("ФОРМА!", values);
 
@@ -14,6 +29,7 @@ function App() {
             reset();
         }
     }, [formState, reset]);
+
 
     return (
         <div className="App">
@@ -27,46 +43,34 @@ function App() {
                     <TextField
                         name="firstName"
                         label="Имя"
-                        {...register("firstName", {
-                            required: "Это обязательное поле!"
-                        })}
-                        helperText={formState.errors.firstName && formState.errors.firstName.message}
-                        error={!!formState.errors.firstName}
+                        {...register("firstName")}
+                        helperText={errors.firstName && errors.firstName.message}
+                        error={!!errors.firstName}
                         fullWidth
                     />
                     <TextField
                         name="lastName"
                         label="Фамилия"
-                        {...register("lastName", {
-                            required: "Это обязательное поле!"
-                        })}
-                        helperText={formState.errors.lastName && formState.errors.lastName.message}
-                        error={!!formState.errors.lastName}
+                        {...register("lastName")}
+                        helperText={errors.lastName && errors.lastName.message}
+                        error={!!errors.lastName}
                         fullWidth
                     />
                 </div>
                 <div className="row">
                     <TextField
-                        {...register("email", {
-                            required: "Это обязательное поле!",
-                            pattern: {
-                                value: /^[A-Z0-9._%+-]+@[A-Z0-9._%+-]+\.[A-Z]{2,}$/i,
-                                message: "Это неверная почта!"
-                            }
-                        })}
-                        helperText={formState.errors.email && formState.errors.email.message}
-                        error={!!formState.errors.email}
+                        {...register("email")}
+                        helperText={errors.email && errors.email.message}
+                        error={!!errors.email}
                         name="email"
                         label="E-Mail"
                         defaultValue=""
                         fullWidth
                     />
                     <TextField
-                        {...register("password", {
-                            required: "Это обязательное поле!"
-                        })}
-                        helperText={formState.errors.password && formState.errors.password.message}
-                        error={!!formState.errors.password}
+                        {...register("password")}
+                        helperText={errors.password && errors.password.message}
+                        error={!!errors.password}
                         name="password"
                         type="password"
                         label="Пароль"
